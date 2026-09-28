@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "ECommerce.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "scalar/v1",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:55683;http://localhost:55684"
+    }
+  }
+}
