@@ -1,5 +1,6 @@
-using ECommerce.Infrastructure.Data;
+using ECommerce.API.Middleware;
 using ECommerce.Core.Interfaces;
+using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
@@ -25,6 +26,8 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseStatusCodePagesWithReExecute("/errors/{0}");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
