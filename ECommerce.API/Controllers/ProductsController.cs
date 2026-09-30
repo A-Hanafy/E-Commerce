@@ -39,7 +39,7 @@ public sealed class ProductsController(IUnitOfWork unitOfWork) : ControllerBase
         var product = await _unitOfWork.Repository<Product>().GetEntityWithSpecAsync(specification);
         if (product is null)
         {
-            return NotFound();
+            return this.ToNotFoundResult();
         }
 
         return Ok(MapProduct(product));
