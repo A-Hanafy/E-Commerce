@@ -1,4 +1,5 @@
 using ECommerce.API.Extensions;
+using ECommerce.API.Helpers;
 using ECommerce.API.Middleware;
 using ECommerce.Core.Errors;
 using ECommerce.Core.Interfaces;
@@ -20,6 +21,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
 
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
@@ -59,14 +61,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var context = services.GetRequiredService<AppDbContext>();
-    var loggerFactory = services.GetRequiredService<ILoggerFactory>();
-
-    await context.Database.MigrateAsync();
-    await StoreContextSeed.SeedAsync(context, loggerFactory);
-}
+await app.ApplyMigrationsAndSeedAsync();
 
 app.Run();

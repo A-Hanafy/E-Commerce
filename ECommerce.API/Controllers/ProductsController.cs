@@ -1,3 +1,4 @@
+using AutoMapper;
 using ECommerce.API.DTOs;
 using ECommerce.API.Helpers;
 using ECommerce.Core.Entities;
@@ -9,9 +10,10 @@ namespace ECommerce.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public sealed class ProductsController(IUnitOfWork unitOfWork) : ControllerBase
+public sealed class ProductsController(IUnitOfWork unitOfWork,IMapper mapper) : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IMapper _mapper = mapper;
 
     [HttpGet]
     public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
@@ -21,9 +23,8 @@ public sealed class ProductsController(IUnitOfWork unitOfWork) : ControllerBase
         var countSpecification = new ProductsWithFiltersForCountSpecification(specParams);
         var totalItems = await _unitOfWork.Repository<Product>().CountAsync(countSpecification);
 
-        var productDtos = products
-            .Select(MapProduct)
-            .ToList();
+
+        var productDtos = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
 
         return Ok(new Pagination<ProductToReturnDto>(
             specParams.PageIndex,
@@ -42,20 +43,8 @@ public sealed class ProductsController(IUnitOfWork unitOfWork) : ControllerBase
             return this.ToNotFoundResult();
         }
 
-        return Ok(MapProduct(product));
+        return Ok(_mapper.Map<Product, ProductToReturnDto>(product));
     }
 
-    private static ProductToReturnDto MapProduct(Product product)
-    {
-        return new ProductToReturnDto
-        {
-            Id = product.Id,
-            Name = product.Name,
-            Description = product.Description ?? string.Empty,
-            Price = product.BasePrice,
-            PictureUrl = product.MainImageUrl ?? string.Empty,
-            ProductType = product.Category?.Name ?? string.Empty,
-            ProductBrand = product.Brand?.Name ?? string.Empty
-        };
-    }
+    
 }
