@@ -16,6 +16,9 @@ namespace ECommerce.API.Helpers
                 .ForMember(d => d.ProductType, o => o.MapFrom(s => s.Category.Name))
                 .ForMember(d => d.PictureUrl, o => o.MapFrom(s => s.MainImageUrl))
                 .ForMember(d => d.Price, o => o.MapFrom(s => s.BasePrice));
+
+            CreateMap<CustomerBasketDto, CustomerBasket>().ReverseMap();
+            CreateMap<BasketItemDto, BasketItem>().ReverseMap();
         }
     }
 }

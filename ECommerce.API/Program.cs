@@ -22,6 +22,8 @@ builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepositor
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
