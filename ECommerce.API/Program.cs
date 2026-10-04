@@ -24,6 +24,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddAutoMapper(cfg => cfg.AddProfile<MappingProfiles>());
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>

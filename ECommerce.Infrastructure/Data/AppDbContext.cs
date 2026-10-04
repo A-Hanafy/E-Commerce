@@ -1,8 +1,9 @@
 using ECommerce.Core.Entities;
-using CatalogAttribute = ECommerce.Core.Entities.Attribute;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using ECommerce.Core.Entities.Identity;
+using ECommerce.Core.Entities.OrderAggregate;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using CatalogAttribute = ECommerce.Core.Entities.Attribute;
 
 namespace ECommerce.Infrastructure.Data;
 
@@ -16,7 +17,12 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : Ident
     public DbSet<AttributeValue> AttributeValues => Set<AttributeValue>();
     public DbSet<VariantAttributeValue> VariantAttributeValues => Set<VariantAttributeValue>();
     public DbSet<Review> Reviews => Set<Review>();
-    public DbSet<Address> Addresses => Set<Address>();
+    public DbSet<ECommerce.Core.Entities.Identity.Address> Addresses => Set<ECommerce.Core.Entities.Identity.Address>();
+
+    public DbSet<Order> Orders => Set<Order>();
+    public DbSet<OrderItem> OrderItems => Set<OrderItem>();
+    public DbSet<DeliveryMethod> DeliveryMethods => Set<DeliveryMethod>();
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
