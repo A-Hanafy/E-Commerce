@@ -7,6 +7,7 @@ using ECommerce.Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.API.Controllers
@@ -33,6 +34,7 @@ namespace ECommerce.API.Controllers
         }
 
         [HttpPost("login")]
+        [EnableRateLimiting("loginPolicy")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);

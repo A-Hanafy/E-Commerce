@@ -18,13 +18,10 @@ namespace ECommerce.API.Extensions
                 var context = services.GetRequiredService<AppDbContext>();
                 var userManager = services.GetRequiredService<UserManager<AppUser>>();
 
-                // تطبيق Migrations المتجر والـ Identity
                 await context.Database.MigrateAsync();
 
-                // Seed بيانات المتجر الأساسية
                 await StoreContextSeed.SeedAsync(context, loggerFactory);
 
-                // Seed بيانات المستخدمين والعناوين
                 await AppIdentityDbContextSeed.SeedUsersAsync(userManager);
             }
             catch (Exception ex)

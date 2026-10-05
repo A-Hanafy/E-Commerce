@@ -17,5 +17,10 @@ namespace ECommerce.Core.Entities
 
         public string Id { get; set; } = string.Empty;
         public List<BasketItem> Items { get; set; } = new List<BasketItem>();
+        public int? DeliveryMethodId { get; set; }
+        public decimal ShippingPrice { get; set; }
+        public string? PaymentIntentId { get; set; }
+        public string? ClientSecret { get; set; }
+
     }
 }
