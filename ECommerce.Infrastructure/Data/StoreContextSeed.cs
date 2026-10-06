@@ -1,4 +1,5 @@
 using ECommerce.Core.Entities;
+using ECommerce.Core.Entities.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -128,6 +129,42 @@ public static class StoreContextSeed
                         MainImageUrl = "https://images.unsplash.com/photo-1552346154-21d32810aba3",
                         IsActive = true
                     });
+
+                if (!await context.DeliveryMethods.AnyAsync())
+                {
+                    await context.DeliveryMethods.AddRangeAsync(
+                        new DeliveryMethod
+                        {
+                            ShortName = "DHL",
+                            DeliveryTime = "1-2 Days",
+                            Description = "Fastest delivery time",
+                            Price = 10m
+                        },
+                        new DeliveryMethod
+                        {
+                            ShortName = "Aramex",
+                            DeliveryTime = "2-5 Days",
+                            Description = "Get it within 5 days",
+                            Price = 5m
+                        },
+                        new DeliveryMethod
+                        {
+                            ShortName = "FedEx",
+                            DeliveryTime = "5-10 Days",
+                            Description = "Slower but cheap",
+                            Price = 2m
+                        },
+                        new DeliveryMethod
+                        {
+                            ShortName = "Free",
+                            DeliveryTime = "1-2 Weeks",
+                            Description = "Free shipping",
+                            Price = 0m
+                        }
+                    );
+
+                    await context.SaveChangesAsync();
+                }
 
                 await context.SaveChangesAsync();
             }
