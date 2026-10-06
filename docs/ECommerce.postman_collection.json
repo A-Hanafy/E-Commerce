@@ -1,0 +1,676 @@
+{
+  "info": {
+    "_postman_id": "f04eb0dc-b321-44d7-932e-65c9491acba5",
+    "name": "Controllers",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56208673",
+    "_collection_link": "https://go.postman.co/collection/56208673-f04eb0dc-b321-44d7-932e-65c9491acba5?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Account",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "Login",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"Password123!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:55683/api/Account/login",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Account",
+                "login"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Register",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"displayName\": \"Ahmed Hanafy\",\r\n  \"email\": \"ahmed@example.com\",\r\n  \"password\": \"Pa$$w0rd123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:55683/api/Account/register",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Account",
+                "register"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Current user",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Account",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Account"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get user address",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Account/address",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Account",
+                "address"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Update user address",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Account/address",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Account",
+                "address"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Check email exists",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Account/emailexists",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Account",
+                "emailexists"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Basket",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "Get Basket",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Basket?id=basket_1",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Basket"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "basket_1"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Create or update basket",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id\": \"basket_1\",\r\n  \"items\": [\r\n    {\r\n      \"id\": 5,\r\n      \"productName\": \"Adidas Ultraboost\",\r\n      \"price\": 180.00,\r\n      \"quantity\": 2,\r\n      \"pictureUrl\": \"https://images.unsplash.com/photo-1552346154-21d32810aba3\",\r\n      \"brand\": \"Adidas\",\r\n      \"type\": \"Shoes\"\r\n    }\r\n  ],\r\n  \"deliveryMethodId\": 1,\r\n  \"shippingPrice\": 10.00,\r\n  \"paymentIntentId\": null,\r\n  \"clientSecret\": null\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:55683/api/Basket",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Basket"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Delete basket",
+          "originalRequest": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Basket?id=basket_1",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Basket"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "basket_1"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Order",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "Create Order",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"basketId\": \"basket_1\",\n  \"deliveryMethodId\": 1,\n  \"shipToAddress\": {\n    \"firstName\": \"Ahmed\",\n    \"lastName\": \"Hanafy\",\n    \"street\": \"10 Main St\",\n    \"city\": \"Cairo\",\n    \"state\": \"EG\",\n    \"zipCode\": \"12345\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "https://localhost:55683/api/Orders",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Orders"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get Orders For User",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Orders",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Orders"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get Order By Id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Orders/1",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Orders",
+                "1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get Delivery Methods",
+          "originalRequest": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Orders/deliveryMethods",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Orders",
+                "deliveryMethods"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Product",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "Get All Products (With Filters & Pagination)",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Products?sort=priceDesc&brandId=1&typeId=1&pageIndex=1&pageSize=6",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Products"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "priceDesc"
+                },
+                {
+                  "key": "brandId",
+                  "value": "1"
+                },
+                {
+                  "key": "typeId",
+                  "value": "1"
+                },
+                {
+                  "key": "pageIndex",
+                  "value": "1"
+                },
+                {
+                  "key": "pageSize",
+                  "value": "6"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get Product By Id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Products/5",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Products",
+                "5"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get All Brands",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Brands",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Brands"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Get All Categories",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Categories",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Categories"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": ""
+        }
+      },
+      "response": [
+        {
+          "name": "Create Or Update Payment Intent",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer YOUR_JWT_TOKEN"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:55683/api/Payments/basket_1",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Payments",
+                "basket_1"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        },
+        {
+          "name": "Stripe Webhook",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:55683/api/Payments/webhook",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "55683",
+              "path": [
+                "api",
+                "Payments",
+                "webhook"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "text",
+          "header": null,
+          "cookie": [],
+          "body": ""
+        }
+      ]
+    }
+  ]
+}
