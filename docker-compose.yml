@@ -1,0 +1,105 @@
+# Production-grade compose for the E-Commerce solution.
+#
+# Usage:
+#   docker compose up -d --build
+#
+# Secrets are injected via environment variables (see .env, git-ignored):
+#   SQL_SA_PASSWORD, JWT_KEY, STRIPE_SECRET_KEY, ...
+# Copy the defaults below into a .env file and override them per environment.
+
+name: ecommerce
+
+services:
+  # ---------------------------------------------------------------- SQL Server
+  ecommerce.db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: ecommerce-db
+    restart: unless-stopped
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: ${SQL_SA_PASSWORD:-Your_strong_Passw0rd}   # min 8 chars, 3 of 4: upper/lower/digit/symbol (default 'sa123456' REJECTED by SQL Server)
+      MSSQL_PID: Developer
+      MSSQL_MEMORY_LIMIT_MB: 2048
+    ports:
+      - "1433:1433"          # expose for SSMS/VS SQL tools; remove in hardened prod behind a private network
+    volumes:
+      - mssql_data:/var/opt/mssql
+    healthcheck:
+      # sqlcmd lives at /opt/mssql-tools18/bin/sqlcmd in the 2022 image.
+      # -C trusts the self-signed cert; -b exits non-zero on failure.
+      # $$ escapes Compose interpolation so the container's own env var is used.
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' -b -o /dev/null"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s      # SQL Server cold boot takes ~20-40s; mandatory
+
+  # -------------------------------------------------------------------- Redis
+  ecommerce.redis:
+    image: redis:7.4-alpine
+    container_name: ecommerce-redis
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+
+  # -------------------------------------------------------------------- Web API
+  ecommerce.api:
+    image: ${DOCKER_REGISTRY-}ecommerceapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ecommerce-api
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Production}
+      ASPNETCORE_HTTP_PORTS: 8080
+
+      # --- Config binding: '__' maps to the ':' layer in appsettings.json ---
+      # appsettings:  ConnectionStrings:myCon   ->  ConnectionStrings__myCon
+      # NOTE: 'ecommerce.db' is the service name — Docker DNS resolves it on
+      # the internal network. Never use 'Server=.' inside containers.
+      ConnectionStrings__myCon: >-
+        Server=ecommerce.db,1433;Database=E-Commerce;
+        User Id=sa;Password=${SQL_SA_PASSWORD:-Your_strong_Passw0rd};
+        TrustServerCertificate=True;MultipleActiveResultSets=true;
+
+      # Points at the compose service name; overrides appsettings' 'localhost:6379'
+      ConnectionStrings__Redis: ${REDIS_CONNECTION_STRING:-ecommerce.redis:6379}
+
+      # Token:Key / Token:Issuer from appsettings.json
+      Token__Key: ${JWT_KEY:-SuperSecretKeyThatIsAtLeast64BytesLongForSecurityReasons_AhmedHanafyEcommerceProject2026}
+      Token__Issuer: ${JWT_ISSUER:-https://localhost:7181}
+
+      # StripeSettings
+      StripeSettings__PublishableKey: ${STRIPE_PUBLISHABLE_KEY:-}
+      StripeSettings__SecretKey: ${STRIPE_SECRET_KEY:-}
+      StripeSettings__WebhookSecret: ${STRIPE_WEBHOOK_SECRET:-}
+
+    depends_on:
+      # Must be service_healthy (NOT just service_started): ApplyMigrationsAndSeedAsync()
+      # connects to SQL Server during startup — without this the app crashes on race.
+      ecommerce.db:
+        condition: service_healthy
+      ecommerce.redis:
+        condition: service_healthy
+
+    volumes:
+      # Optional per-environment secrets; harmless in prod, used by VS dev certs
+      - ${APPDATA:-}/ASP.NET/Https:/home/app/.aspnet/https:ro
+
+volumes:
+  mssql_data:
+    driver: local
+  redis_data:
+    driver: local

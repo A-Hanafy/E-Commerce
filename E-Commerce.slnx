@@ -1,5 +1,8 @@
 <Solution>
   <Project Path="ECommerce.Core/ECommerce.Core.csproj" />
   <Project Path="ECommerce.Infrastructure/ECommerce.Infrastructure.csproj" />
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
   <Project Path="ECommerce.API/ECommerce.API.csproj" />
 </Solution>

@@ -59,7 +59,7 @@ namespace ECommerce.Infrastructure.Services
 
             var order = new Order(buyerEmail, shippingAddress, deliveryMethod!, items, subtotal, basket.PaymentIntentId);
 
-            _unitOfWork.Repository<Order>().AddAsync(order);
+            await _unitOfWork.Repository<Order>().AddAsync(order);
 
             var result = await _unitOfWork.CompleteAsync();
 
