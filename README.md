@@ -50,12 +50,16 @@ This project is fully containerized using **Docker** and **Docker Compose**.
 - **Cache**: Redis alpine container for high-performance distributed caching.
 
 ### How to Run:
+
 ```bash
 docker-compose up -d --build
+```
 
------
+---
+
 ## ⚙️ Getting Started
 
 1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/A-Hanafy/E-Commerce.git](https://github.com/A-Hanafy/E-Commerce.git)
+```bash
+git clone https://github.com/A-Hanafy/E-Commerce.git
+```
