@@ -40,6 +40,20 @@ This repository includes a pre-configured Postman Collection to easily test all 
 
 ---
 
+## 🐳 Docker & Containerization
+
+This project is fully containerized using **Docker** and **Docker Compose**.
+
+### Services Included:
+- **Web API**: ASP.NET Core Web API with Multi-stage Dockerfile.
+- **Database**: Microsoft SQL Server 2022 container with configured HealthChecks.
+- **Cache**: Redis alpine container for high-performance distributed caching.
+
+### How to Run:
+```bash
+docker-compose up -d --build
+
+-----
 ## ⚙️ Getting Started
 
 1. **Clone the repository:**
