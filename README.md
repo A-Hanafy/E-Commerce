@@ -55,6 +55,20 @@ This project is fully containerized using **Docker** and **Docker Compose**.
 docker-compose up -d --build
 ```
 
+## 🧪 Unit Testing
+
+The solution includes a dedicated unit testing project (`ECommerce.UnitTests`) to ensure code reliability and preserve clean architecture principles.
+
+### Key Highlights:
+- **Framework & Libraries**: Built using **xUnit** and **Moq**.
+- **Coverage**: Focuses on core domain and application layer logic (such as `OrderService`).
+- **Isolation**: Utilizes interface mocking (`IBasketRepository`, `IUnitOfWork`, `IPaymentService`) to test business scenarios completely isolated from database infrastructure or external APIs.
+- **Pattern**: Adheres strictly to the **Arrange-Act-Assert (AAA)** structure.
+
+### Run Tests:
+```bash
+dotnet test
+```
 ---
 
 ## ⚙️ Getting Started
