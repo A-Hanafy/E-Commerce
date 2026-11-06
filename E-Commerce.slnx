@@ -5,4 +5,5 @@
     <Build />
   </Project>
   <Project Path="ECommerce.API/ECommerce.API.csproj" />
+  <Project Path="ECommerce.UnitTests/ECommerce.UnitTests.csproj" />
 </Solution>
